@@ -1,11 +1,20 @@
 os: Visual Studio 2015
 
 environment:
-    BOOST_ROOT: C:\Libraries\boost_1_67_0
-    BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14
+  BOOST_ROOT: C:\Libraries\boost_1_67_0
+  BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14
 
 build_script:
-    - md build
-    - cd build
-    - cmake -G "Visual Studio 14 Win64" ..
-    - MSBuild Millecoin.sln /p:Configuration=Release /m
+  - echo $APPVEYOR_PROJECT_NAME
+  - echo $APPVEYOR_PROJECT_SLUG
+  - echo $APPVEYOR_BUILD_FOLDER
+  - md build
+  - cd build
+  - cmake -G "Visual Studio 14 Win64" ..
+  - MSBuild Millecoin.sln /p:Configuration=Release /m
+
+artifacts:
+  - path: C:\projects\testing\build\src\Release\Millecoind
+  - path: C:\projects\testing\build\src\Release\service
+  - path: C:\projects\testing\build\src\Release\zedwallet
+  - path: C:\projects\testing\build\src\Release\miner
