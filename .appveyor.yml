@@ -41,8 +41,8 @@ deploy:
   provider: GitHub
   auth_token:
     secure: HT/ew3LRA9maLoCZHjZYTykRaRVzNU8aSB4Z7EGlnJIydYrngA8gsZMd03WyxXln
-  artifact: build\src\Release\testing-$(appveyor_project_slug)-$(appveyor_build_id).zip
-  # artifact: 'build\src\Release\testing-*.zip'
+  # artifact: build\src\Release\testing-$(appveyor_project_slug)-$(appveyor_build_id).zip
+  artifact: 'build\src\Release\testing*.zip'
   draft: true 
   prerelease: false
   on:
