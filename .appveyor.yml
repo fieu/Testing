@@ -5,12 +5,12 @@ environment:
   BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14
 
 build_script:
-  - echo $(APPVEYOR_PROJECT_SLUG)
-  - echo $(APPVEYOR_PROJECT_NAME)
-  - echo $(APPVEYOR_BUILD_FOLDER)
-  - echo $(APPVEYOR_BUILD_ID)
-  - echo $(APPVEYOR_BUILD_NUMBER)
-  - echo $(APPVEYOR_BUILD_VERSION)
+  - echo "$APPVEYOR_PROJECT_SLUG"
+  - echo "$APPVEYOR_PROJECT_NAME"
+  - echo "$APPVEYOR_BUILD_FOLDER"
+  - echo "$APPVEYOR_BUILD_ID"
+  - echo "$APPVEYOR_BUILD_NUMBER"
+  - echo "$APPVEYOR_BUILD_VERSION"
   - md build
   - cd build
   - cmake -G "Visual Studio 14 Win64" ..
