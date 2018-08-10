@@ -25,7 +25,7 @@ artifacts:
   - path: build\src\Release\service.exe
   - path: build\src\Release\zedwallet.exe
   - path: build\src\Release\miner.exe
-  - path: build/src/Release/testing*.zip
+  - path: build\src\Release\testing*.zip
 
 on_success:
   - ps: Invoke-RestMethod https://raw.githubusercontent.com/k3rn31p4nic/appveyor-discord-webhook/master/send.ps1 -o send.ps1
