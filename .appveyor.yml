@@ -21,7 +21,7 @@ build_script:
   - MSBuild Millecoin.sln /p:Configuration=Release /m
 
 artifacts:
-  - path: build/src\Release\Millecoind
-  - path: build/src\Release\service
-  - path: build/src\Release\zedwallet
-  - path: build/src\Release\miner
+  - path: build\src\Release\Millecoind
+  - path: build\src\Release\service
+  - path: build\src\Release\zedwallet
+  - path: build\src\Release\miner
