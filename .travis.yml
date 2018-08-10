@@ -25,7 +25,7 @@ install:
 script:
 - mkdir build && cd build
 - chmod +x ../external/rocksdb/build_tools/build_detect_platform
-- chmod +x chmod +x ../external/rocksdb/build_tools/version.sh
+- chmod +x ../external/rocksdb/build_tools/version.sh
 - cmake -DCMAKE_BUILD_TYPE=Release -DSTATIC=true .. && make -j $(nproc)
 before_deploy:
 - cd src
