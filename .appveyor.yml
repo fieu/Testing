@@ -5,6 +5,10 @@ environment:
   BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14
 
 build_script:
+  - echo $PWD
+  - pwd
+  - ls
+  - echo $(ls -alth)
   - echo "$APPVEYOR_PROJECT_SLUG"
   - echo "$APPVEYOR_PROJECT_NAME"
   - echo "$APPVEYOR_BUILD_FOLDER"
