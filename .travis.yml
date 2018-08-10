@@ -17,13 +17,10 @@ matrix:
     - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
   - os: osx
 before_install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository ppa:ethcore/ethcore
-  -y    ; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -q                            ;
-  fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository --yes ppa:ethcore/ethcore ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -q ; fi
 install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install librocksdb-dev
-  -y            ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y librocksdb-dev ; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install readline; brew link --force readline; fi
 script:
 - mkdir build && cd build
