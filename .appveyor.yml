@@ -20,12 +20,12 @@ build_script:
   - cd build
   - cmake -G "Visual Studio 14 Win64" ..
   - MSBuild Millecoin.sln /p:Configuration=Release /m
-  - cd ..
-  - 7z a %APPVEYOR_PROJECT_SLUG%-%APPVEYOR_BUILD_ID%.zip "build\src\Release\*.exe"
+  - cd cd src/Release
+  - 7z a %APPVEYOR_PROJECT_SLUG%-%APPVEYOR_BUILD_ID%.zip "*.exe"
 
 artifacts:
   - path: build\src\Release\Millecoind.exe
   - path: build\src\Release\service.exe
   - path: build\src\Release\zedwallet.exe
   - path: build\src\Release\miner.exe
-  - path: testing*.zip
+  - path: bbuild/src/Release/testing*.zip
