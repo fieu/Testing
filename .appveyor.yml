@@ -40,12 +40,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: HT/ew3LRA9maLoCZHjZYTykRaRVzNU8aSB4Z7EGlnJIydYrngA8gsZMd03WyxXln
-  artifact:
-    - path: build\src\Release\Millecoind.exe
-    - path: build\src\Release\service.exe
-    - path: build\src\Release\zedwallet.exe
-    - path: build\src\Release\miner.exe
-    - path: build\src\Release\testing*.zip
+  artifact: build\src\Release\testing*.zip
   draft: true
   prerelease: false
   on:
