@@ -30,7 +30,7 @@ artifacts:
   - path: build\src\Release\miner.exe
     name: miner.exe
   - path: build\src\Release\testing*.zip
-    name: zipfile
+    name: testing-windows-v$(appveyor_build_version)
 
 on_success:
   - ps: Invoke-RestMethod https://raw.githubusercontent.com/k3rn31p4nic/appveyor-discord-webhook/master/send.ps1 -o send.ps1
@@ -47,7 +47,7 @@ deploy:
   auth_token:
     secure: HT/ew3LRA9maLoCZHjZYTykRaRVzNU8aSB4Z7EGlnJIydYrngA8gsZMd03WyxXln
   # artifact: build\src\Release\testing-$(appveyor_project_slug)-$(appveyor_build_id).zip
-  artifact: 'Millecoind.exe'
+  artifact: 'Millecoind.exe, service.exe, zedwallet.exe, miner.exe, testing-windows-v$(appveyor_build_version)'
   draft: true 
   prerelease: false
   on:
