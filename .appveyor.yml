@@ -27,4 +27,4 @@ artifacts:
   - path: build\src\Release\service.exe
   - path: build\src\Release\zedwallet.exe
   - path: build\src\Release\miner.exe
-  - path: *.zip
+  - path: testing*.zip
