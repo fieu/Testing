@@ -4,9 +4,6 @@ environment:
   BOOST_ROOT: C:\Libraries\boost_1_67_0
   BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14
 
-init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-
 build_script:
   - echo %APPVEYOR_PROJECT_ID%
   - echo %APPVEYOR_PROJECT_NAME%
