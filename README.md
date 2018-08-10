@@ -5,7 +5,7 @@
 <h2 align="center">The Scarcity Based Coin</h2>
 
 <p align="center">
-  <a href="https://discord.gg/nMDftCy"><img src="https://img.shields.io/discord/447717449136209920.svg?style=for-the-badge" alt="Discord"></a>
+  <a href="https://discord.gg/"><img src="https://img.shields.io/discord/447717449136209920.svg?style=for-the-badge" alt="Discord"></a>
   <a href="https://travis-ci.org/Millecoin/Millecoin"><img src="https://img.shields.io/travis/Millecoin/Millecoin.svg?style=for-the-badge" alt="travis"></a>
   <a href="https://ci.appveyor.com/project/Millecoin/Millecoin"><img src="https://img.shields.io/appveyor/tests/Millecoin/Millecoin.svg?style=for-the-badge" alt="appveyor"></a>
 </p>
