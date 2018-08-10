@@ -26,7 +26,8 @@ script:
 - mkdir build && cd build
 - chmod +x ../external/rocksdb/build_tools/build_detect_platform
 - chmod +x ../external/rocksdb/build_tools/version.sh
-- cmake -DCMAKE_BUILD_TYPE=Release -DSTATIC=true .. && make -j $(nproc)
+- cmake -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
+- make -j $(nproc)
 before_deploy:
 - cd src
 - mkdir millecoin-${TRAVIS_TAG}
