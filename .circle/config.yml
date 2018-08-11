@@ -5,9 +5,11 @@ jobs:
       - image: ubuntu:16.04
     steps:
       - checkout
-      - run:
-        name: Greeting
-        command: echo Hello, world.
-      - run:
-        name: Print the Current Time
-        command: date; date
+      - run: export CXXFLAGS="-std=gnu++11"
+      - run: apt-get update
+      - run: apt-get install -y software-properties-common
+      - run: add-apt-repository ppa:ubuntu-toolchain-r/test
+      - run: apt-get update
+      - run: apt-get install -y sudo gcc g++ cmake clang automake build-essential g++-4.9 libboost1.55-all-dev 
+      - run: export MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
+      - run: export PROJECT_NAME="testing"
