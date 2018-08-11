@@ -36,7 +36,8 @@ script:
 - cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxproc=2500; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxprocperuid=2500; fi
-- make
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then travis_wait 30 make; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make; fi
 before_deploy:
 - cd src
 - mkdir millecoin-${TRAVIS_TAG}
@@ -52,6 +53,7 @@ after_failure:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
   - ./send.sh failure $WEBHOOK_URL
+
 deploy:
   provider: releases
   api_key:

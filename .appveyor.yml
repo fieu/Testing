@@ -32,7 +32,6 @@ on_failure:
   - ps: ./send.ps1 failure $env:WEBHOOK_URL
 
 deploy:
-  # tag: 'appveyor-windows-v$(appveyor_build_version)'
   release: appveyor-$(appveyor_project_slug)-windows-v$(appveyor_build_version)
   description: '_Automated AppVeyor Release v$(appveyor_build_version)_'
   provider: GitHub
