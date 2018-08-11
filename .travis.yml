@@ -36,8 +36,7 @@ script:
 - cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxproc=2500; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxprocperuid=2500; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then travis_wait 30 make; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make;  fi
+- make
 before_deploy:
 - cd src
 - mkdir ${PROJECT_NAME}-${TRAVIS_TAG}
