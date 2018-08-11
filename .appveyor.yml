@@ -5,14 +5,6 @@ environment:
   BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14
 
 build_script:
-  - echo %APPVEYOR_PROJECT_ID%
-  - echo %APPVEYOR_PROJECT_NAME%
-  - echo %APPVEYOR_PROJECT_SLUG%
-  - echo %APPVEYOR_BUILD_ID%
-  - echo %APPVEYOR_BUILD_NUMBER%
-  - echo %APPVEYOR_BUILD_VERSION%
-  - echo %AAPPVEYOR_JOB_ID%
-  - echo %cd%
   - md build
   - cd build
   - cmake -G "Visual Studio 14 Win64" ..
@@ -40,7 +32,7 @@ on_failure:
   - ps: ./send.ps1 failure $env:WEBHOOK_URL
 
 deploy:
-  tag: 'appveyor-windows-v$(appveyor_build_version)'
+  # tag: 'appveyor-windows-v$(appveyor_build_version)'
   release: appveyor-$(appveyor_project_slug)-windows-v$(appveyor_build_version)
   description: '_Automated AppVeyor Release v$(appveyor_build_version)_'
   provider: GitHub

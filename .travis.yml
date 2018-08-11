@@ -20,6 +20,7 @@ matrix:
         - automake
     env:
     - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
+    - PROJECT_NAME="testing"
   - os: osx
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository --yes ppa:ethcore/ethcore ; fi
@@ -33,21 +34,31 @@ script:
 - chmod +x ../external/rocksdb/build_tools/build_detect_platform
 - chmod +x ../external/rocksdb/build_tools/version.sh
 - cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then make -j $(nproc); fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxproc=2500; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxprocperuid=2500; fi
+- make
 before_deploy:
 - cd src
 - mkdir millecoin-${TRAVIS_TAG}
-- mv Millecoind miner zedwallet service poolwallet millecoin-${TRAVIS_TAG}/
-- cp ../../LICENSE millecoin-${TRAVIS_TAG}/
-- GZIP=-9 tar cvfz millecoin-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz millecoin-${TRAVIS_TAG}/
-# deploy:
-#   provider: releases
-#   api_key:
-#     secure: XyM7qAnX9Slm4bX7WYPOnWGRuXfuwc7wnJHb7wN4WGy+GefXm3xSFoNIZdmTY1XnJ2HpIAXuuHL2aey8KKt+gEXbhp882z6m9jZWOdog3cjObdRCsOuETNE0rbXasDvntdhm1Jn7PM+mkN6O9GoqRVaEnyyIwCGEFA7Cc/d2KgtqpTu0NB6nIPZbTgJnudHDQYEWl0kwA1UjkYrEIRlAOFTaRHBUsUHPTFW8758mgerYitLm27BNJTbo74lYe65iExtguKFN/VRVXDl08/2i3gnAxzWJ2K0qUZu7PD8ePd+2UC1wwE2Dc1uiTOmhDgVeuQO6k0tuipjIA+dh5r7A8/YPyOX4zoZ4ac+g1mWSRO1VS/WQ2Uvq2XU848KACLJ+ky3kHWZKowTSl/v3+3rU4c6kqYJHShkH5XlFp503yRqlaqOow4ogz020eIEHEFCgwLhNxZSEUzKP4rEZPpboZyNJbW7lL92UxMZDZm1zKMvnrY5zi2HltYzIQyOjDvmXUxQD8blz1C66lqfBc6mApjDRZVLUcfTT4WIGAWc6opTYJAJpCg34zGAQgXoFaOG0cH3ApsREmBd1dg9d8cJscedy9qZjn3HsmibmdRiGctB5o08JrjfM5sZVk620iKFgovis7q7XfIKb3rQdSfsiRwsfZEwhE2lvY3bf9B0VMrU=
-#   file:
-#     - millecoin-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz
-#   skip_cleanup: true
-#   on:
-#     repo: millecoin/millecoin
-#     tags: true
+- cp Millecoind miner zedwallet service poolwallet $PROJECT_NAME-${TRAVIS_TAG}/
+- cp ../../LICENSE $PROJECT_NAME-${TRAVIS_TAG}/
+- GZIP=-9 tar cvfz $PROJECT_NAME-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz $PROJECT_NAME-${TRAVIS_TAG}/
+
+after_success:
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh success $WEBHOOK_URL
+after_failure:
+  - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
+deploy:
+  provider: releases
+  api_key:
+    secure: VqDbYxroZyUvgdUuIg8MeMn4OPYDvPCKCbzxy9Tb2fJzE3SN4FCjP4rN4plun0enjnVwUIQI9XwcZHkczdEzKtGPvTAGGcUdvv1VI9DfBcyuRJQJgYGKoq0n4aRs/Q7XK00xvsxHMFMyjMeW13fNdTfd2Cl1tgdNqmCLioTtgSpivq442pdn0mOiwdXmmZzFd6yC5vzXd4AIH6ekKqLNTizxN8afiIRssqnvbb4oDEUDY5+Xzvsg9OfqS213LtLPLqeem4wJcFoB7taem26Rp3qGsZqu8TeF4gnWpNYKmf/6fY7oHA3GLTfb/EFz3Fi135klSMJ3vTJK1YOk1fvjizWaoatUT/QzLAU3stA8ezup7zK10JoM5aYsIVRIO29iIIrzEXqkIjCwWQ11lE11tS/MtqXvW7drsBv9uRYwFZm6SbFrK5mQ01TFyNGnF8kg10mw50O2ktVZsDt/SnVBStz5ayVZIqyLSdW7BdM+rUUwpxYcm2oBcpFGCArNEy6O9j54Cvvqd/44wQQ5YuYeRCjjpYmMjx1YWQMIacKvPfzxiCjT0U8JuEpW/WI2dQ25XgGg8eaFJUCI10Z0gdJx+sQ85LP3q2k42bkrny8pzRaHqnQTET2EtLNugKTDUgdECTgjdXrMNdZF20obB1rQNx3ssyBk6u+5p6LTiuF9OH4=
+  file:
+    - ${PROJECT_NAME}-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz
+  skip_cleanup: true
+  on:
+    repo: millecoin/millecoin
+    tags: true
