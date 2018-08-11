@@ -83,6 +83,7 @@ jobs:
     - run: sudo add-apt-repository --yes ppa:ethcore/ethcore
     - run: sudo apt-get update
     - run: sudo apt-get install -y librocksdb-dev
+    - run: mkdir build && ls
     - run: cd build; chmod +x ../external/rocksdb/build_tools/build_detect_platform
     - run: cd build; chmod +x ../external/rocksdb/build_tools/version.sh
     - run: cd build; cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
