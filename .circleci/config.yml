@@ -86,6 +86,8 @@ jobs:
     - run: pwd
     - run: mkdir build
     - run: cd build
+    - run: pwd
+    - run: ls
     - run: chmod +x ../external/rocksdb/build_tools/build_detect_platform
     - run: chmod +x ../external/rocksdb/build_tools/version.sh
     - run: cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
