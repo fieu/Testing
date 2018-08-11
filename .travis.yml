@@ -37,7 +37,7 @@ script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxproc=2500; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxprocperuid=2500; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then travis_wait 30 make; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make;  fi
 before_deploy:
 - cd src
 - mkdir millecoin-${TRAVIS_TAG}
