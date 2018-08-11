@@ -6,23 +6,15 @@ env:
 matrix:
   include:
   - os: linux
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-4.9
-        - libboost1.55-all-dev
-        - build-essential
-        - gcc
-        - cmake
-        - clang
-        - automake
     env:
     - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
     - PROJECT_NAME="testing"
   - os: osx
 before_install:
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; sudo apt-get update; sudo apt-get update; sudo apt-get update; sudo apt-get update; fi  
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; sudo apt-get update; sudo apt-get update; sudo apt-get update; sudo apt-get update; fi  
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y software-properties-common g++-4.9 libboost1.55-all-dev build-essential gcc cmake clang automake; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository --yes ppa:ethcore/ethcore ; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -q ; fi
 install:
