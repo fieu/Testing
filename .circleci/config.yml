@@ -83,15 +83,10 @@ jobs:
     - run: sudo add-apt-repository --yes ppa:ethcore/ethcore
     - run: sudo apt-get update
     - run: sudo apt-get install -y librocksdb-dev
-    - run: pwd
-    - run: mkdir build
-    - run: cd build
-    - run: pwd
-    - run: ls
-    - run: chmod +x ../external/rocksdb/build_tools/build_detect_platform
-    - run: chmod +x ../external/rocksdb/build_tools/version.sh
-    - run: cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
-    - run: make
+    - run: cd build; chmod +x ../external/rocksdb/build_tools/build_detect_platform
+    - run: cd build; chmod +x ../external/rocksdb/build_tools/version.sh
+    - run: cd build; cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
+    - run: cd build; make
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # Save test results
