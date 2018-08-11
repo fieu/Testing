@@ -5,10 +5,10 @@ env:
 - CXXFLAGS="-std=gnu++11"
 matrix:
   include:
+  - os: osx
     env:
     - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
     - PROJECT_NAME="testing"
-  - os: osx
 install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install readline; brew link --force readline; fi
 script:
