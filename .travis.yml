@@ -61,5 +61,5 @@ deploy:
     - ${PROJECT_NAME}-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz
   skip_cleanup: true
   on:
-    repo: millecoin/millecoin
+    repo: NurdTurd/Testing
     tags: true
