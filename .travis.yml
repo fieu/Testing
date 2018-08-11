@@ -40,10 +40,10 @@ script:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then make;  fi
 before_deploy:
 - cd src
-- mkdir millecoin-${TRAVIS_TAG}
-- cp Millecoind miner zedwallet service poolwallet $PROJECT_NAME-${TRAVIS_TAG}/
-- cp ../../LICENSE $PROJECT_NAME-${TRAVIS_TAG}/
-- GZIP=-9 tar cvfz $PROJECT_NAME-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz $PROJECT_NAME-${TRAVIS_TAG}/
+- mkdir ${PROJECT_NAME}-${TRAVIS_TAG}
+- cp Millecoind miner zedwallet service poolwallet ${PROJECT_NAME}-${TRAVIS_TAG}/
+- cp ../../LICENSE ${PROJECT_NAME}-${TRAVIS_TAG}/
+- GZIP=-9 tar cvfz ${PROJECT_NAME}-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz ${PROJECT_NAME}-${TRAVIS_TAG}/
 
 after_success:
   - wget https://raw.githubusercontent.com/k3rn31p4nic/travis-ci-discord-webhook/master/send.sh
