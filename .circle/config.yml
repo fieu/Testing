@@ -79,7 +79,15 @@ jobs:
     # If run your tests in parallel containers you can use this third party nose plugin
     # https://github.com/dlanger/nose-parallel
     # If you use django you can switch to the nose django runner to make use of this.
-    - run: echo "replace this with your test commands - see config comments" && false
+    - run: export CXXFLAGS="-std=gnu++11"
+    - run: export CXXFLAGS="-std=gnu++11"
+    - run: apt-get update
+    - run: apt-get install -y software-properties-common
+    - run: add-apt-repository ppa:ubuntu-toolchain-r/test
+    - run: apt-get update
+    - run: apt-get install -y sudo gcc g++ cmake clang automake build-essential g++-4.9 libboost1.55-all-dev 
+    - run: export MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
+    - run: export PROJECT_NAME="testing"
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # Save test results
