@@ -44,7 +44,7 @@ jobs:
     - run: sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
     - run: sudo apt-get update
     - run: sudo apt-get install -y sudo gcc g++ cmake clang automake build-essential g++-4.9 libboost1.55-all-dev 
-    - run: export MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
+    - run: export MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
     - run: export PROJECT_NAME="testing"
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
