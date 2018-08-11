@@ -5,28 +5,11 @@ env:
 - CXXFLAGS="-std=gnu++11"
 matrix:
   include:
-  - os: linux
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-4.9
-        - libboost1.55-all-dev
-        - build-essential
-        - gcc
-        - cmake
-        - clang
-        - automake
     env:
     - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
     - PROJECT_NAME="testing"
   - os: osx
-before_install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo add-apt-repository --yes ppa:ethcore/ethcore ; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -q ; fi
 install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y librocksdb-dev ; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install readline; brew link --force readline; fi
 script:
 - mkdir build
@@ -34,8 +17,8 @@ script:
 - chmod +x ../external/rocksdb/build_tools/build_detect_platform
 - chmod +x ../external/rocksdb/build_tools/version.sh
 - cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxproc=2500; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxprocperuid=2500; fi
+# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxproc=2500; fi
+# - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo sysctl -w kern.maxprocperuid=2500; fi
 - make
 before_deploy:
 - cd src
@@ -53,6 +36,12 @@ after_failure:
   - chmod +x send.sh
   - ./send.sh failure $WEBHOOK_URL
 
+before_deploy:
+  # Set up git user name and tag this commit
+  - git config --local user.name "Sheldon Rupp"
+  - git config --local user.email "me@shel.io"
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+
 deploy:
   provider: releases
   api_key:
@@ -60,6 +49,3 @@ deploy:
   file:
     - ${PROJECT_NAME}-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz
   skip_cleanup: true
-  on:
-    repo: NurdTurd/Testing
-    tags: true

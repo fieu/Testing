@@ -38,7 +38,7 @@ deploy:
   auth_token:
     secure: HT/ew3LRA9maLoCZHjZYTykRaRVzNU8aSB4Z7EGlnJIydYrngA8gsZMd03WyxXln
   artifact: 'Millecoind.exe, service.exe, zedwallet.exe, miner.exe, $(appveyor_project_slug)-windows-v$(appveyor_build_version)'
-  draft: false
+  draft: true
   prerelease: true
   on:
     branch: master
