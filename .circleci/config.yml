@@ -72,6 +72,7 @@ jobs:
     # https://github.com/dlanger/nose-parallel
     # If you use django you can switch to the nose django runner to make use of this.
     - run: export CXXFLAGS="-std=gnu++11"
+    - run: export DEBIAN_FRONTEND=noninteractive
     - run: sudo apt-get update
     - run: sudo apt-get upgrade -y
     - run: sudo apt-get install -y software-properties-common
