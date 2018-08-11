@@ -73,12 +73,22 @@ jobs:
     # If you use django you can switch to the nose django runner to make use of this.
     - run: export CXXFLAGS="-std=gnu++11"
     - run: sudo apt-get update
+    - run: sudo apt-get upgrade -y
     - run: sudo apt-get install -y software-properties-common
     - run: sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
     - run: sudo apt-get update
     - run: sudo apt-get install -y sudo gcc g++ cmake clang automake build-essential g++-4.9 libboost1.55-all-dev 
     - run: export MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
     - run: export PROJECT_NAME="testing"
+    - run: sudo add-apt-repository --yes ppa:ethcore/ethcore
+    - run: sudo apt-get update
+    - run: sudo apt-get install -y librocksdb-dev
+    - run: mkdir build
+    - run: cd build
+    - run: chmod +x ../external/rocksdb/build_tools/build_detect_platform
+    - run: chmod +x ../external/rocksdb/build_tools/version.sh
+    - run: cmake -DFORCE_READLINE=FALSE -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
+    - run: make
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # Save test results
