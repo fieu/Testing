@@ -37,7 +37,15 @@ jobs:
     # Prepare for artifact and test results  collection equivalent to how it was done on 1.0.
     # In many cases you can simplify this from what is generated here.
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
-    - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+    - run: export CXXFLAGS="-std=gnu++11"
+    - run: export CXXFLAGS="-std=gnu++11"
+    - run: apt-get update
+    - run: apt-get install -y software-properties-common
+    - run: add-apt-repository ppa:ubuntu-toolchain-r/test
+    - run: apt-get update
+    - run: apt-get install -y sudo gcc g++ cmake clang automake build-essential g++-4.9 libboost1.55-all-dev 
+    - run: export MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9
+    - run: export PROJECT_NAME="testing"
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
     # Restore the dependency cache
