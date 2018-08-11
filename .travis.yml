@@ -49,3 +49,5 @@ deploy:
   file:
     - ${PROJECT_NAME}-${TRAVIS_TAG}-${TRAVIS_OS_NAME}.tar.gz
   skip_cleanup: true
+  on:
+    tags: true
