@@ -4,20 +4,4 @@ services:
   builder:
     build: ./builder
     volumes:
-      - builder-data:/app/Testing/build/src
-  daemon:
-    build: ./daemon
-    volumes:
-      - builder-data:/app
-      - daemon-data:/root/.Millecoin
-    ports:
-      - 31237:31237
-      - 31238:31238
-    depends_on:
-      - builder
-
-volumes:
-  daemon-data:
-    driver: local
-  builder-data:
-    driver: local
+      - C:\testing-build-linux-x86_64:/app
